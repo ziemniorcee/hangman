@@ -1,30 +1,21 @@
+from add import pics, words
+import random
+
+
 def hangman():
-    word = "anakonda"
-    check = list("anakonda")
+    word = random.choice(words)
+    check = list(word)
     result = "_" * len(word)
     result = list(result)
-
     hang = 0
-    pics = ["  +---+\n  |   |\n      |\n      |\n      |\n      |\n=========",
-
-            "  +---+\n  |   |\n  O   |\n      |\n      |\n      |\n=========",
-
-            "  +---+\n  |   |\n  O   |\n  |   |\n      |\n      |\n=========",
-
-            "  +---+\n  |   |\n  O   |\n /|   |\n      |\n      |\n=========",
-
-            "  +---+\n  |   |\n  O   |\n /|\  |\n      |\n      |\n=========",
-
-            "  +---+\n  |   |\n  O   |\n /|\  |\n /    |\n      |\n=========",
-
-            "  +---+\n  |   |\n  O   |\n /|\  |\n / \  |\n      |\n========="]
-
     win = True
 
     while hang < 6 and win:
         print(result)
+        print('\033[H\033[2J', end='', flush=True)
         b = 0
-        x = input("Podaj literke")
+        x = input("Podaj literke").lower()
+
         if x in word:
             for let in word:
 
@@ -37,5 +28,9 @@ def hangman():
         if result == check:
             print("Wygrałeś!")
             win = False
+    if hang == 6:
+        print("Przegrałeś!")
+        print(f"Słowo to: {word}")
+
 
 hangman()
